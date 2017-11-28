@@ -1,0 +1,29 @@
+.container {
+    width: 100%;
+    text-align: center;
+}
+
+.puzzle {
+    width: 350px;
+    height: 350px;
+    border: black solid;
+    background-color: black;
+}
+
+.puzzle--square-empty, .puzzle--square-pair, .puzzle--square-odd {
+    width: 79px;
+    height: 79px;
+    display: inline-block;
+    cursor: pointer;
+    border: black solid;
+    border-radius: 2px;
+    margin: 1px;
+}
+
+.puzzle--square-pair {
+    background-color: #9b4638;
+}
+
+.puzzle--square-odd {
+    background-color: #c4bdad;
+}
