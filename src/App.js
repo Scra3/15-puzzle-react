@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      successPuzzle: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, false],
-      puzzle: this.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, false])
+      puzzle: this.genetareShufflePuzzle(props.successPuzzle)
     };
   }
 
@@ -22,6 +21,16 @@ class App extends Component {
     });
 
     return puzzle;
+  }
+
+  genetareShufflePuzzle(puzzle) {
+    let newPuzzle = [];
+    for (var i = 1; i <= puzzle.length - 1; i++) {
+      newPuzzle.push(i);
+    }
+    newPuzzle.push(false);
+
+    return this.shuffle(newPuzzle);
   }
 
   getRandomInt(min, max) {
@@ -38,7 +47,6 @@ class App extends Component {
             {!!square ? square : 'empty'}
           </div>
         )}
-        {this.success() && <div>WIN</div>}
       </div>
     );
   }
@@ -78,15 +86,20 @@ class App extends Component {
   }
 
   success() {
-    const {successPuzzle, puzzle} = this.state;
+    const { puzzle } = this.state;
+    const { successPuzzle } = this.props;
+    let isWon = true;
 
-    return successPuzzle.every((square, i) => {
+    console.log(successPuzzle);
+    console.log(successPuzzle);
+    successPuzzle.every((square, i) => {
       if (square !== puzzle[i]) {
-        return false;
+        isWon = false;
+        return;
       }
-
-      return true;
     });
+
+    return isWon;
   }
 
   render() {
@@ -94,6 +107,7 @@ class App extends Component {
       <div className='container'>
         <div className='App'>
           {this.displayPuzzle()}
+          {this.success() && <div>WIN</div>}
         </div>
       </div>
     );
