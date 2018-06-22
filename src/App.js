@@ -90,8 +90,6 @@ export class App extends Component {
     const { successPuzzle } = this.props;
     let isWon = true;
 
-    console.log(successPuzzle);
-    console.log(successPuzzle);
     successPuzzle.every((square, i) => {
       if (square !== puzzle[i]) {
         isWon = false;
